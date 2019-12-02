@@ -1,18 +1,9 @@
-const https = require('https');
-const fs = require('fs');
-var data ='';
+const Scrapper = require('./Scrapper').Scrapper;
+const cheerio = require('cheerio');
 
-https.get('https://9gag.com/v1/featured-posts', function (res) {
-  console.log('statusCode:', res.statusCode);
-  console.log('headers:', res.headers);
-
-  res.on('data', function (d) {
-    data += d;
-  });
-
-  res.on('end', function() {
-    let result = JSON.parse(data);
-    let posts = result.data.items;
+const process = function(result, contentType) {
+  console.log(contentType);
+  let posts = result.data.items;
 
     let modifiedPosts = posts.map(function(item) {
       return {
@@ -22,14 +13,28 @@ https.get('https://9gag.com/v1/featured-posts', function (res) {
       };
     });
 
-    const csv = modifiedPosts.map(function(post) {
-      return Object.values(post).join(',');
-    });
-    fs.writeFile('./data.csv', csv.join('\n'), function(err) {
-      if (err) throw err;
-      console.log('The file has been saved!');
-    });
-  });
-}).on('error', function(e) {
-  console.error(e);
-});
+    return modifiedPosts;
+}
+const url = "https://9gag.com/v1/featured-posts";
+const config = {
+    method: "GET"
+};
+
+const scrap9gag = new Scrapper(url, config, process);
+scrap9gag.scrap();
+
+//const url2 = "https://fr.wikipedia.org/wiki/Liste_des_codes_HTTP";
+//const process2 = function($, contentType) {
+//  const result = [];
+//  const rows = $('table:first-of-type tbody tr');
+//  rows.map(function(row) {
+//    console.log(row);
+//    return row.children.map(function(column) {
+//      console.log(column);
+//    })
+//  });
+//
+//  return result;
+//}
+//const scrapWiki = new Scrapper(url2, config, process2);
+//scrapWiki.scrap();

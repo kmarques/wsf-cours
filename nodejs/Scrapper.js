@@ -1,9 +1,11 @@
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 const cheerio = require('cheerio');
 
-const Scrapper = function (url, config, process) {
-  const req = https.request(url, config, function (res) {
+const Scrapper = function (url, config, process, outputFile) {
+  const protocol = url.indexOf('https') === -1 ? http : https;
+  const req = protocol.request(url, config, function (res) {
     if(res.statusCode >= 300 || res.statusCode < 200) throw "Error status code " + res.statusCode;
 
     let data = '';
@@ -27,7 +29,7 @@ const Scrapper = function (url, config, process) {
       const csv = result.map(function(item) {
         return Object.values(item).join(',');
       });
-      fs.writeFile('./data.csv', csv.join('\n'), function(err) {
+      fs.writeFile('./'+outputFile, csv.join('\n'), function(err) {
         if (err) throw err;
         console.log('The file has been saved!');
       });
@@ -36,7 +38,10 @@ const Scrapper = function (url, config, process) {
     console.error(e);
   });
 
-  this.scrap = function() {
+  this.scrap = function(postData) {
+    if(config.method === "POST") {
+      req.write(postData);
+    }
     req.end();
   }
 }

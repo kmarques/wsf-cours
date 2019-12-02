@@ -22,15 +22,28 @@ class Student extends Person {
   }
 }
 const student1 = new Student("Foo", 2019);
-console.log(student1.__proto__.hello());
-console.log(student1.display());
-student1.hello();
-console.log(student1.state);
-
-console.log(person1.display());
 
 String.prototype.sayHi = function() {
   console.log("hi!");
 }
 
-"test".sayHi();
+
+
+function Teacher(name, config) {
+  let myname = name;
+  this.publicName = name;
+  this.conf = config;
+
+  this.getName = function() {
+    return myname.toUpperCase();
+  }
+};
+
+const tech1 = new Teacher("Karl", {age: 29});
+
+console.log(tech1.myname);
+console.log(tech1.getName());
+tech1.myname = "Foo";
+console.log(tech1.conf.age);
+console.log(tech1.myname);
+console.log(tech1.getName());

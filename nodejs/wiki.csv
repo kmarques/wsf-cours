@@ -1,0 +1,5 @@
+Code,Message,Signification
+100,Continue,Attente de la suite de la requête.
+101,Switching Protocols,Acceptation du changement de protocole.
+102,Processing,WebDAV  RFC 2518[3]: Traitement en cours (évite que le client dépasse le temps d’attente limite).
+103,Early Hints,RFC 8297[4] : (Expérimental) Dans l'attente de la réponse définitive, le serveur retourne des liens que le client peut commencer à télécharger.

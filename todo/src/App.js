@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Board from "./components/Board";
 import BoardContext from "./context/board";
 
@@ -6,10 +6,10 @@ function App() {
   return (
     <div>
       <BoardContext.Consumer>
-        {({boards, loading}) => {
+        {({selectors}) => {
           return <>
-            {!loading && boards.map(board => <Board key={board.id} {...board}/>)}
-            {loading && <p>Loading...</p>}
+            {!selectors.isLoading() && selectors.getBoards().map(board => <Board key={board.id} {...board}/>)}
+            {selectors.isLoading() && <p>Loading...</p>}
           </>
         }}
       </BoardContext.Consumer>  

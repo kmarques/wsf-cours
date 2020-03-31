@@ -47,13 +47,44 @@ export const BoardProvider = function({children}) {
       });
   }
 
+  const addCard = (_card) => {
+    return fetch("http://localhost:3004/cards", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(_card)
+    })
+    .then(response => response.json())
+    .then(data => {
+      setLists(lists.map(list => {
+        if (list.id === _card.listId) {
+          list = {
+            ...list,
+            cards: [
+              ...list.cards, 
+              data
+            ]
+          };
+        }
+
+        return list;
+      }));
+
+      return data;
+    });
+  }
+
   const actions = {
-    fetchLists, fetchCards
+    fetchLists, fetchCards, addCard
   };
 
   const selectors = {
     getLists: (_board) => lists.filter(list => list.boardId === _board.id) || [],
-    getCards: (_list) => lists.find(list => list.id === _list.id).cards || []
+    getCards: (_list) => lists.find(list => list.id === _list.id).cards || [],
+    getCardsCount: function (_list) {
+      return this.getCards(_list).length;
+    } 
   }
 
   return <BoardContext.Provider value={{boards, loading, actions, selectors}}>

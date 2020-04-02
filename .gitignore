@@ -1,3 +1,4 @@
 checker
 node_modules
 .DS_Store
+private

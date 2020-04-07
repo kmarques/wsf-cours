@@ -21,6 +21,7 @@ export default {
       type: Array,
       default: () => []
     }
-  }
+  },
+  inject: ["getList"]
 };
 </script>

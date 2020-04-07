@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Board title="Board 1" :lists="lists" :addList="addList" />
+    <Board title="Board 1" :lists="lists" />
   </div>
 </template>
 
@@ -31,7 +31,16 @@ export default {
   methods: {
     addList: function(list) {
       this.lists = [...this.lists, { id: Date.now(), ...list }];
+    },
+    getList: function(id) {
+      return this.lists.find(list => list.id === id);
     }
+  },
+  provide: function() {
+    return {
+      addList: this.addList,
+      getList: this.getList
+    };
   }
 };
 </script>

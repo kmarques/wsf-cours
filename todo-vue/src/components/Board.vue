@@ -25,9 +25,9 @@ export default {
   },
   props: {
     title: String,
-    lists: Array,
-    addList: Function
+    lists: Array
   },
+  inject: ["addList"],
   methods: {
     onNewList: function(values) {
       //const data = new FormData(e.currentTarget);

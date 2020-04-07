@@ -1,12 +1,11 @@
 <template>
   <div id="board">
     <div class="header">
-      <h1>{{ title }}</h1>
+      <h1>Board 1</h1>
     </div>
     <div class="body">
       <NewListForm v-bind:onSubmit="onNewList" />
       <ul>
-        <button v-on:click="addList">Add List</button>
         <List v-for="list in lists" v-bind:key="list.id" v-bind="list" />
       </ul>
     </div>
@@ -23,11 +22,12 @@ export default {
     List,
     NewListForm
   },
-  props: {
-    title: String,
-    lists: Array
+  computed: {
+    lists: function() {
+      return this.getLists();
+    }
   },
-  inject: ["addList"],
+  inject: ["addList", "getLists"],
   methods: {
     onNewList: function(values) {
       //const data = new FormData(e.currentTarget);

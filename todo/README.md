@@ -58,7 +58,7 @@ Dans l'exemple précédent, le composant parent définit le titre et un count qu
 
 #### Event Listener
 
-Il existe des **props** spéciaux qui permette d'écouter un événement sur certains éléments du DOM comme un `button` ou un `input`. Ces attributs sont préfixés par **on** suivi du nom de l'événement en CamelCase, ex: `onClick`. On peut donc leur attribuer une fonction contenue dans une variable ou non.
+Il existe des **props** spéciaux qui permettent d'écouter un événement sur certains éléments du DOM comme un `button` ou un `input`. Ces attributs sont préfixés par **on** suivi du nom de l'événement en CamelCase, ex: `onClick`. On peut donc leur attribuer une fonction contenue dans une variable ou non.
 
 ```javascript
 const Button = ({title, count}) => {
@@ -105,7 +105,7 @@ Les hooks permettent de reproduire plusieurs fonctionnalités des composants Rea
 ### Rendre les composants dynamiques
 
 Afin de rendre les composants plus dynamiques, on va introduire la notion de **state** ou état d'un composant.<br>
-Afin de mettre en place cet état, on va utiliser un **hook** qui se nomme `useState`. Celui-ci peut en argument une valeur par défaut (`undefined` si non spécifié) et retourne un tableau comprenant la valeur de l'état ainsi qu'une méthode pour la modifier.
+Afin de mettre en place cet état, on va utiliser un **hook** qui se nomme `useState`. Celui-ci prend en argument une valeur par défaut (`undefined` si non spécifié) et retourne un tableau comprenant la valeur de l'état ainsi qu'une méthode pour la modifier.
 
 ```javascript
 import React, {useState} from "react";

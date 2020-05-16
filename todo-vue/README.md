@@ -151,7 +151,8 @@ Afin de générer une liste d'élément venant d'un tableau, on peut utiliser l'
 ```xml
 <template>
   <ul>
-    <li v-for="(item, index) in items" :key="item.id">{{ index }} - {{ item.name }}</li>
+    <li v-for="(item, index) in items" :key="item.id">{{ index }} - {{ item.name }} - avec index</li>
+    <li v-for="item in items" :key="item.id">{{ index }} - {{ item.name }} - sans index</li>
   </ul>
 </template>
 ```
